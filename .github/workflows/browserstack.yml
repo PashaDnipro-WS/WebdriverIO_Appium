@@ -2,16 +2,14 @@ name: CI Tests
 
 on:
   push:
-    branches:
-      - main
-
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  test-browserstack-android:
+  browserstack-android:
     name: BrowserStack Android Tests
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -45,11 +43,11 @@ jobs:
         if: always()
         run: npm run allure:generate
 
-      - name: Upload Allure Report artifact
+      - name: Upload Allure Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report
+          name: allure-report-android
           path: allure-report/
           retention-days: 30
 
