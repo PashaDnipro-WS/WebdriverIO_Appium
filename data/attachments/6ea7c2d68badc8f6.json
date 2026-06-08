@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//android.widget.TextView[@text=\"Compose\"]/ancestor::android.view.View[@checkable=\"true\"][1]//android.view.View[@content-desc=\"Unfollow interest\"]"
+}
