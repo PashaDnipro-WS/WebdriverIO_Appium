@@ -12,6 +12,7 @@ describe('Now in Android', () => {
         await driver.terminateApp(APP_ID);
         await driver.execute('mobile: clearApp', { appId: APP_ID });
         await driver.activateApp(APP_ID);
+        await driver.setOrientation('PORTRAIT');
 
         await expect(await ForYouPage.isDisplayed()).toBe(true);
     });
@@ -41,8 +42,8 @@ describe('Now in Android', () => {
         await ForYouPage.selectComposeTopic();
         await ForYouPage.tapDone();
 
-        await ForYouPage.bookmarkArticle('The new Google Pixel Watch');
-        await ForYouPage.bookmarkArticle('MAD Skills Compose');
+        await ForYouPage.bookmarkArticleByTitle('The new Google Pixel Watch');
+        await ForYouPage.bookmarkArticleByTitle('MAD Skills Compose');
 
         await ForYouPage.openSavedTab();
 
@@ -71,7 +72,7 @@ describe('Now in Android', () => {
 
         await expect(await InterestsPage.isDisplayed()).toBe(true);
 
-        await InterestsPage.openTopic('Camera & Media');
+        await InterestsPage.openVisibleTopic('Camera & Media');
 
         await expect(
             await InterestsPage.isTopicPageOpened('Camera & Media')

@@ -8,3 +8,8 @@ allure-results
 
 apps
 
+logs/
+*.log
+
+# BrowserStack SDK
+key-metrics.json

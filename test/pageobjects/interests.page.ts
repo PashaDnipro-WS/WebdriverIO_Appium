@@ -11,9 +11,6 @@ class InterestsPage extends Page {
     private topicTitle = (topic: string) =>
         `android=new UiSelector().text("${topic}")`;
 
-    private topicDescription = (text: string) =>
-        `android=new UiSelector().textContains("${text}")`;
-
     async isDisplayed() {
         return this.isElementDisplayed(this.screenTitle);
     }
@@ -25,9 +22,7 @@ class InterestsPage extends Page {
             this.selectedTopicCheckbox(topic)
         );
     }
-
-    async openTopic(topic: string) {
-        await this.scrollToText(topic);
+    async openVisibleTopic(topic: string) {
         await this.clickElement(this.topicTitle(topic));
     }
 
@@ -37,7 +32,7 @@ class InterestsPage extends Page {
 
     async isCameraAndMediaContentDisplayed() {
         return this.isElementDisplayed(
-            this.topicDescription('capturing and playing media')
+            'android=new UiSelector().textContains("capturing and playing media")'
         );
     }
 }

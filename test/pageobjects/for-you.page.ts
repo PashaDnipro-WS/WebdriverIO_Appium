@@ -2,21 +2,18 @@ import Page from './page.js';
 
 class ForYouPage extends Page {
     private screenTitle = 'android=new UiSelector().text("Now in Android")';
-    private searchButton = '~Search';
-    private settingsButton = '~Settings';
 
-    private interestsTitle = 'android=new UiSelector().text("What are you interested in?")';
+    private searchButton = '~Search';
 
     private headlinesTopic = '~Headlines';
     private uiTopic = '~UI';
     private composeTopic = '~Compose';
-    private architectureTopic = '~Architecture';
-    private androidStudioTopic = '~Android Studio & Tools';
     private testingTopic = '~Testing';
 
     private doneButton = 'android=new UiSelector().text("Done")';
 
-    private firstArticleTitle = 'android=new UiSelector().textContains("Deep Links Crash Course")';
+    private firstArticleTitle =
+        'android=new UiSelector().textContains("Deep Links Crash Course")';
 
     private forYouTab = 'android=new UiSelector().text("For you")';
     private savedTab = 'android=new UiSelector().text("Saved")';
@@ -25,24 +22,14 @@ class ForYouPage extends Page {
     private articleTitle = (title: string) =>
         `android=new UiSelector().textContains("${title}")`;
 
-    private bookmarkButtonByArticle = (title: string) =>
-        `//android.widget.TextView[contains(@text, "${title}")]
-    /following::android.view.View[@content-desc="Bookmark"][1]`;
+    private bookmarkButton = '~Bookmark';
 
     async isDisplayed() {
         return this.isElementDisplayed(this.screenTitle);
     }
 
-    async isInterestsBlockDisplayed() {
-        return this.isElementDisplayed(this.interestsTitle);
-    }
-
     async openSearch() {
         await this.clickElement(this.searchButton);
-    }
-
-    async openSettings() {
-        await this.clickElement(this.settingsButton);
     }
 
     async selectHeadlinesTopic() {
@@ -57,14 +44,6 @@ class ForYouPage extends Page {
         await this.clickElement(this.composeTopic);
     }
 
-    async selectArchitectureTopic() {
-        await this.clickElement(this.architectureTopic);
-    }
-
-    async selectAndroidStudioTopic() {
-        await this.clickElement(this.androidStudioTopic);
-    }
-
     async selectTestingTopic() {
         await this.scrollToText('Testing');
         await this.clickElement(this.testingTopic);
@@ -72,10 +51,6 @@ class ForYouPage extends Page {
 
     async tapDone() {
         await this.clickElement(this.doneButton);
-    }
-
-    async isDoneButtonDisplayed() {
-        return this.isElementDisplayed(this.doneButton);
     }
 
     async isFirstArticleDisplayed() {
@@ -94,14 +69,23 @@ class ForYouPage extends Page {
         await this.clickElement(this.interestsTab);
     }
 
-    async bookmarkArticle(title: string) {
+    async bookmarkArticleByTitle(title: string) {
         await this.scrollToTextContains(title);
-        await this.clickElement(this.bookmarkButtonByArticle(title));
-        await browser.pause(500);
+
+        const buttons = await this.getElements(this.bookmarkButton);
+
+        for (const button of buttons) {
+            if (await button.isDisplayed()) {
+                await button.click();
+                return;
+            }
+        }
+
+        throw new Error(`Bookmark button for article "${title}" was not found`);
     }
 
     async isArticleDisplayedByTitle(title: string) {
-        await this.scrollToText(title);
+        await this.scrollToTextContains(title);
         return this.isElementDisplayed(this.articleTitle(title));
     }
 

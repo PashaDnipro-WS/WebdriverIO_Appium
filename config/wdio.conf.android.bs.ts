@@ -20,7 +20,7 @@ export const config = {
       },
       debug: true,
       networkLogs: true,
-      consoleLogs: 'warn'
+      consoleLogs: 'warnings'
     }]
   ],
 
@@ -35,7 +35,9 @@ export const config = {
       automationName: 'UiAutomator2',
       autoAcceptAlerts: true,
       autoGrantPermissions: true,
-      newCommandTimeout: 300
+      newCommandTimeout: 300,
+      orientation: 'PORTRAIT',
+      noReset: false
     }
   }]
 }

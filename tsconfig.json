@@ -13,6 +13,7 @@
             "expect-webdriverio",
             "@wdio/mocha-framework",
             "@wdio/appium-service",
+            "@wdio/browserstack-service"
         ],
         "skipLibCheck": true,
         "noEmit": true,
@@ -26,6 +27,6 @@
     },
     "include": [
         "test",
-        "config/wdio.conf.ts"
+        "config"
     ]
 }
