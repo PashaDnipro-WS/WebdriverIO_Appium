@@ -20,7 +20,7 @@ export const config = {
     platformName: 'Android',
     'appium:deviceName': 'RF8R90007TX',
     'appium:udid': 'RF8R90007TX',
-    'appium:app': join(process.cwd(), './apps/android/mda-2.2.0-25.apk'),
+    'appium:app': join(process.cwd(), './apps/android/app-demo-debug.apk'),
     'appium:automationName': 'UiAutomator2',
     'appium:newCommandTimeout': 300,
     'appium:noReset': false,
