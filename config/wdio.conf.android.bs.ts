@@ -8,19 +8,20 @@ export const config = {
 
   user: process.env.BROWSERSTACK_USERNAME,
   key: process.env.BROWSERSTACK_ACCESS_KEY,
+
   hostname: 'hub.browserstack.com',
+  protocol: 'https',
+  port: 443,
+  path: '/wd/hub',
 
   services: [
     ['browserstack', {
       app: process.env.BROWSERSTACK_ANDROID_APP_ID,
-      testObservability: true,
-      testObservabilityOptions: {
-        projectName: 'BrowserStack Android app testing',
-        buildName: 'browserstack Android build',
-      },
+      browserstackLocal: false,
       debug: true,
       networkLogs: true,
-      consoleLogs: 'warnings'
+      consoleLogs: 'warnings',
+      testObservability: false
     }]
   ],
 
@@ -35,9 +36,7 @@ export const config = {
       automationName: 'UiAutomator2',
       autoAcceptAlerts: true,
       autoGrantPermissions: true,
-      newCommandTimeout: 300,
-      orientation: 'PORTRAIT',
-      noReset: false
+      newCommandTimeout: 300
     }
   }]
 }
